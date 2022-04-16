@@ -159,7 +159,7 @@ class AG(object):
     def Random(cls, population_len, gen_len):
         return cls([Chromosome.Random(gen_len) for i in range(0,population_len)],None)
 
-    def __init__(self, chromosome_list=None, fitness_list=None):
+    def __init__(self, chromosome_list=None, fitness_list=None, elitist=True, cross_function=cross_simple):
         if chromosome_list is None:
             raise ValueError('Invalid argument')
 
@@ -167,8 +167,8 @@ class AG(object):
         self.p_mu = 0.3
         self.mu_min = -2
         self.mu_max = 2
-        self.elitist = True
-        self.cross_function = cross_simple
+        self.elitist = elitist
+        self.cross_function = cross_function
 
         self.population = []
         if fitness_list is not None and len(chromosome_list) != len(fitness_list):
