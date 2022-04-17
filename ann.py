@@ -116,4 +116,4 @@ def CreateNetwork(inputs:int, topology:list, w:list, func=sigmoid, json:bool=Fal
         }
         return ann
 
-    return Network(input_parameter, layers, func)
+    return Network(input_parameter, layers, outputs_types, func)

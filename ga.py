@@ -157,7 +157,7 @@ class AG(object):
     
     @classmethod
     def Random(cls, population_len, gen_len):
-        return cls([Chromosome.Random(gen_len) for i in range(0,population_len)],None)
+        return cls([Chromosome.Random(gen_len) for i in range(0,population_len)])
 
     def __init__(self, chromosome_list=None, fitness_list=None, elitist=True, cross_function=cross_simple):
         if chromosome_list is None:
@@ -227,18 +227,19 @@ class AG(object):
         if not self.chromosome_in_list(c1,next_generation):
             next_generation.append(c1)
 
-        if not self.chromosome_in_list(c2,next_generation) and len(next_generation) < population_len:
+        if not self.chromosome_in_list(c2,next_generation) and len(next_generation) < len(self.population):
             next_generation.append(c2)
 
         return next_generation
 
 
-    def cross(self, k=3, fitness_max=True):
+    def next_generation(self, k=3, fitness_max=True):
         next_generation = []
         population_len = len(self.population)
 
         if self.elitist:
             next_generation.append(self.get_winner(fitness_max))
+            print(next_generation[0].fitness)
 
         while len(next_generation) < population_len:
             wins = self.tournament(k, fitness_max)
